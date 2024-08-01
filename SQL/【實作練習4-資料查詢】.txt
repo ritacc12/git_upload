@@ -1,44 +1,37 @@
 --4-1. 列出 轄管 區域內有單一 避難設施大於 1000 容人數量的 轄管分局 及 分局連絡電話 。
 SELECT DISTINCT
-    p.name,
-    p.phone
+    p.name AS 轄管分局,
+    p.phone AS 分局連絡電話
 FROM
     policestation p
-    LEFT JOIN facility      f ON p.id = f.policestation_id
+    LEFT JOIN facility f ON p.id = f.policestation_id
 WHERE
     f.people > 1000;
 
 --4-2. 列出 轄管 區域內有單一 避難設施大於 1000 容人數量的 轄管分局 及 分局連絡電話 並 計算出各轄管分局數量 。 （關鍵字 partition)
-SELECT DISTINCT
+SELECT 
     p.name           AS 轄管分局,
     p.phone          AS 分局連絡電話,
-    COUNT(f.address) AS 各轄管分局數量
-FROM
-    policestation p
-    LEFT JOIN facility      f ON p.id = f.policestation_id
-WHERE
-    f.people > 1000
-GROUP BY
-    p.name,
-    p.phone;
+    COUNT(f.address) over (PARTITION BY f.people) AS 各轄管分局數量
+FROM  facility f 
+
+    LEFT JOIN policestation p
+    ON  f.policestation_id = p.id
+    where f.people > 1000
+
 
 --4-3. 承上題， 再補上 避難設施地址 、 類型 。
-SELECT DISTINCT
-    p.name              AS 轄管分局,
-    p.phone             AS 分局連絡電話,
-    COUNT(f.address)    AS 各轄管分局數量,
+SELECT 
+    p.name           AS 轄管分局,
+    p.phone          AS 分局連絡電話,
+    COUNT(f.address) over (PARTITION BY f.people) AS 各轄管分局數量,
     f.address           AS 避難設施地址,
     f.building_category AS 類型
-FROM
-    policestation p
-    LEFT JOIN facility      f ON p.id = f.policestation_id
-WHERE
-    f.people > 1000
-GROUP BY
-    p.name,
-    p.phone,
-    f.address,
-    f.building_category;
+FROM  facility f 
+
+    LEFT JOIN policestation p
+    ON  f.policestation_id = p.id
+    where f.people > 1000;
 
 --4-4. 查詢設施地址包含「中」字的避難設施，列出資料必須含 村里別 、 避難設施地址 、 容人數量 、 轄管分局 及 分局連絡電話 。
 SELECT
