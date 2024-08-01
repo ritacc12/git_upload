@@ -1,26 +1,29 @@
 -- 村莊
-create Table Country(
-    country_id VARCHAR2(10 BYTE) primary key,
-    country_name NVARCHAR2(20),
+CREATE TABLE country (
+    country_id     VARCHAR2(10 BYTE) PRIMARY KEY,
+    country_name   NVARCHAR2(20),
     office_address NVARCHAR2(100),
-    phone VARCHAR2(20 byte)
+    phone          VARCHAR2(20 BYTE)
 );
 
+
 --警察局
-create table POLICESTATION(
-     id VARCHAR2(10 byte) primary key,
-     name NVARCHAR2(20),
-     address NVARCHAR2(100),
-     phone VARCHAR2(20 byte)
+CREATE TABLE policestation (
+    id      VARCHAR2(10 BYTE) PRIMARY KEY,
+    name    NVARCHAR2(20),
+    address NVARCHAR2(100),
+    phone   VARCHAR2(20 BYTE)
 )
 
 --避難設施
-create table FACILITY(
-    id  VARCHAR2(10 byte) primary key,
-    building_category  NVARCHAR2(20),
-    address NVARCHAR2(100),
-    people INTEGER,
-    floor  INTEGER,
-    country_id VARCHAR2(10 BYTE) REFERENCES COUNTRY(country_id),
-    policeStation_id VARCHAR2(10 BYTE) REFERENCES POLICESTATION(id)
+CREATE TABLE facility (
+    id                VARCHAR2(10 BYTE) PRIMARY KEY,
+    building_category NVARCHAR2(20),
+    address           NVARCHAR2(100),
+    people            INTEGER,
+    floor             INTEGER,
+    country_id        VARCHAR2(10 BYTE)
+        REFERENCES country ( country_id ),
+    policestation_id  VARCHAR2(10 BYTE)
+        REFERENCES policestation ( id )
 );
