@@ -1,0 +1,52 @@
+--COUNTRY
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C001','大埔里','竹南鎮公義路1035號','03 758 1072');
+INSERT INTO Country
+VALUES('C002','竹南里','竹南鎮竹南里中山路 103 號','037-472735');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C003','山佳里','竹南鎮山佳里國光街 14 號','037-614186');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C004','埔頂里','後龍鎮埔頂里中興路136-1號','037-724839');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C005','綠苗里','苗栗市綠苗里中正路 766 號','037-333240');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C006','民族里','民族里民族路96號','037-660001');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C007','忠孝里','忠孝里光大街82號','037-661145');
+INSERT INTO Country(country_id,country_name,office_address,phone)
+VALUES('C008','信義里','信義里信義路53巷1號','037-616072');
+
+
+--POLICESTATION
+INSERT INTO policestation(id,name,address,phone)
+VALUES('M001','竹南分局','苗栗縣竹南鎮民族街72號','03 747 4796');
+INSERT INTO policestation(id,name,address,phone)
+VALUES('M002','苗栗分局','苗栗縣苗栗市金鳳街109號','03 732 0059');
+INSERT INTO policestation(id,name,address,phone)
+VALUES('M003','頭份分局','苗栗縣頭份市中興路503號','03 766 3004');
+
+--FACILITY
+INSERT INTO facility
+VALUES('1','公寓','苗栗縣竹南鎮中埔街20號',100,1,'C001','M001');
+INSERT INTO facility
+VALUES('2','大樓','苗栗縣竹南鎮和平街79號',3142,1,'C002','M001');
+INSERT INTO facility
+VALUES('3','大樓','苗栗縣竹南鎮龍山路三段142號',1072,1,'C003','M001');
+INSERT INTO facility
+VALUES('4','公共設施','苗栗縣後龍鎮中華路1498號',32,1,'C004','M001');
+INSERT INTO facility
+VALUES('5','公寓','苗栗縣苗栗市米市街80號',106,1,'C005','M002');
+INSERT INTO facility
+VALUES('6','公寓','苗栗縣苗栗市光復路117號',26,1,'C005','M002');
+INSERT INTO facility
+VALUES('7','大樓','苗栗縣苗栗市博愛街109號',2038,2,'C005','M002');
+INSERT INTO facility
+VALUES('8','大樓','苗栗縣苗栗市大同路53號',128,2,'C005','M002');
+INSERT INTO facility
+VALUES('9','公共設施','苗栗縣頭份市民族里和平路102號',353,1,'C006','M003');
+INSERT INTO facility
+VALUES('10','私營單位','苗栗縣頭份市忠孝忠孝一路69號',501,1,'C007','M003');
+INSERT INTO facility
+VALUES('11','公寓','苗栗縣頭份市信義里中正路65號',194,1,'C008','M003');
+INSERT INTO facility
+VALUES('12','私營單位','苗栗縣頭份市信義里中正路116號',78,1,'C008','M003');

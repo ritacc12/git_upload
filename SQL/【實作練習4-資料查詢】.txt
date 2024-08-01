@@ -1,0 +1,32 @@
+--4-1. 列出 轄管 區域內有單一 避難設施大於 1000 容人數量的 轄管分局 及 分局連絡電話 。
+select distinct p.name, p.phone
+from policestation p
+left join facility f on p.id = f.POLICESTATION_ID
+where f.people > 1000;
+
+--4-2. 列出 轄管 區域內有單一 避難設施大於 1000 容人數量的 轄管分局 及 分局連絡電話 並 計算出各轄管分局數量 。 （關鍵字 partition)
+select distinct p.name as 轄管分局, p.phone as 分局連絡電話 , count(f.address) as 各轄管分局數量
+from policestation p
+left join facility f on p.id = f.POLICESTATION_ID
+where f.people > 1000
+GROUP BY p.name, p.phone; 
+
+--4-3. 承上題， 再補上 避難設施地址 、 類型 。
+select distinct p.name as 轄管分局, p.phone as 分局連絡電話 , count(f.address) as 各轄管分局數量,f.address as 避難設施地址, f.building_category as 類型
+from policestation p
+left join facility f on p.id = f.POLICESTATION_ID
+where f.people > 1000
+GROUP BY p.name, p.phone, f.address, f.building_category; 
+
+--4-4. 查詢設施地址包含「中」字的避難設施，列出資料必須含 村里別 、 避難設施地址 、 容人數量 、 轄管分局 及 分局連絡電話 。
+select c.country_name as 村里別, f.address as 避難設施地址, f.people as 容人數量, p.name as 轄管分局 ,p.phone as 分局連絡電話
+from facility f
+left join country c on f.country_id = c.country_id
+left join policestation p on f.policestation_id = p.id
+where f.address like '%中%'; 
+
+--4-5. 查詢 所有 類別 為 公寓及大樓 的 避難設施 列出 資料必須包含 村里別 、 村里辦公室位置 、 避難設施地址 、 容人數量 。
+select c.country_name as 村里別 , c.office_address as 村里辦公室位置 ,f.address as 避難設施地址, f.people as 容人數量
+from facility f
+left join country c on f.country_id = c.country_id
+where f.building_category in('公寓','大樓');

@@ -1,0 +1,26 @@
+-- 村莊
+create Table Country(
+    country_id VARCHAR2(10 BYTE) primary key,
+    country_name NVARCHAR2(20),
+    office_address NVARCHAR2(100),
+    phone VARCHAR2(20 byte)
+);
+
+--警察局
+create table POLICESTATION(
+     id VARCHAR2(10 byte) primary key,
+     name NVARCHAR2(20),
+     address NVARCHAR2(100),
+     phone VARCHAR2(20 byte)
+)
+
+--避難設施
+create table FACILITY(
+    id  VARCHAR2(10 byte) primary key,
+    building_category  NVARCHAR2(20),
+    address NVARCHAR2(100),
+    people INTEGER,
+    floor  INTEGER,
+    country_id VARCHAR2(10 BYTE) REFERENCES COUNTRY(country_id),
+    policeStation_id VARCHAR2(10 BYTE) REFERENCES POLICESTATION(id)
+);
