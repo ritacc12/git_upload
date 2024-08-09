@@ -2,13 +2,13 @@ package com.cathaybk.practice.nt00550345.b;
 
 public class Sales extends Employee {
 
-	private int bonus;
-	private int payment;
+	int performance; // 業績
+	private int bonus; // 業績獎金
+	private int payment; // 薪資
 
-	public Sales(String name, String department, int payment, int bonus) {
-		super(name, department);
-		this.bonus = bonus;
-		this.payment = payment;
+	public Sales(String name, String department, int salary, int performance) {
+		super(name, department, salary);
+		this.performance = (int) (performance * 0.05); // 轉換為業績獎金
 	}
 
 	public int getBonus() {
@@ -16,7 +16,8 @@ public class Sales extends Employee {
 	}
 
 	public void setBonus(int bonus) {
-		this.bonus = bonus;
+		this.bonus = (int) (performance * 0.05);
+
 	}
 
 	public int getPayment() {
@@ -24,16 +25,14 @@ public class Sales extends Employee {
 	}
 
 	public void setPayment(int payment) {
-		this.payment = payment;
+		this.payment = getSalary() + bonus;
 	};
 
 	@Override
 	public void printInfo() {
 		super.printInfo();
-		System.out.println("月薪:" + payment);
-		System.out.println("業績獎金:" + Math.round(bonus * 0.05));
-		System.out.println("總計:" + Math.round(payment + bonus * 0.05));
-
+		System.out.println("業績獎金:" + Math.round(performance));
+		System.out.println("總計:" + Math.round(getSalary() + performance));
 	}
 
 }

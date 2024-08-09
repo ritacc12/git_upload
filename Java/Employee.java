@@ -5,15 +5,11 @@ public class Employee implements IWork {
 	private String name;
 	private String department;
 	private int salary;
-	private int payment;
 
-	public Employee() {
-
-	};
-
-	public Employee(String name, String department) {
+	public Employee(String name, String department, int salary) {
 		this.name = name;
 		this.department = department;
+		this.salary = salary;
 	}
 
 	public String getName() {
@@ -44,13 +40,6 @@ public class Employee implements IWork {
 	public void printInfo() {
 		System.out.println("薪資單");
 		System.out.println("姓名:" + name + "\t " + "工作部門:" + department);
+		System.out.println("月薪:" + salary);
 	}
-
-	public int getPayment() {
-		return payment;
-	}
-
-	public void setPayment(int payment) {
-		this.payment = payment;
-	};
 }

@@ -22,7 +22,7 @@ public class RandomLotto {
 		for (Integer integer : randomLotto) {
 			System.out.print(integer + " ");
 		}
-		System.out.println(" ");
+		System.out.println();
 
 		Collections.sort(randomLotto);
 		System.out.print("排序後：");
