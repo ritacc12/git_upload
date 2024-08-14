@@ -8,10 +8,11 @@ public class MultiplicationTable {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i < length; i++) { // 1-9
 			for (int j = 2; j < length; j++) { // 2-9
+				sb.append(j).append('*').append(i).append('=');
 				if (i * j < 10) {
-					sb.append(j).append('*').append(i).append('=').append(" ").append(i * j).append('\t');
+					sb.append(" ").append(i * j).append('\t');
 				} else {
-					sb.append(j).append('*').append(i).append('=').append(i * j).append('\t');
+					sb.append(i * j).append('\t');
 				}
 				System.out.print(sb.toString());
 				sb.setLength(0);
