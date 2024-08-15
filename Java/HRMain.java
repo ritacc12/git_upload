@@ -28,17 +28,17 @@ public class HRMain {
 				new OutputStreamWriter(new FileOutputStream(file), encoding))) {
 			writter.write(new String(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF }));
 			for (Employee employee : employeeList) {
+				sb.append(employee.getName()).append(',');
 				if (employee instanceof Sales) {
-					int performance = ((Sales) employee).performance;
-					sb.append(employee.getName()).append(',').append(employee.getSalary() + performance).append('\n');
-					writter.write(sb.toString());
-					sb.setLength(0);
+					int payment = ((Sales) employee).getPayment();
+					sb.append(payment).append('\n');
 
-				} else {
-					sb.append(employee.getName()).append(',').append(employee.getSalary()).append('\n');
-					writter.write(sb.toString());
-					sb.setLength(0);
+				} else if (employee instanceof Supervisor) {
+					int payment = ((Supervisor) employee).getPayment();
+					sb.append(payment).append('\n');
 				}
+				writter.write(sb.toString());
+				sb.setLength(0);
 			}
 
 		} catch (Exception e) {

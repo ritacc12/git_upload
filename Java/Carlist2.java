@@ -19,18 +19,16 @@ import java.util.TreeMap;
 public class Carlist2 {
 
 	public static void main(String[] args) throws IOException {
-		// WriteOut();
+		WriteOut();
 		GroupBy();
 	}
 
-	public static void GroupBy() {
+	public static void GroupBy() throws IOException {
 		List<Map<String, String>> groupBycarList = new ArrayList<>();
 
-		InputStreamReader inputStreamReader = null;
-		try {
-			inputStreamReader = new InputStreamReader(
-					new FileInputStream("C:\\Users\\Admin\\Desktop\\Java評量_第6題cars.csv"));
-			try (BufferedReader bwBufferedReader = new BufferedReader(inputStreamReader)) {
+		try (InputStreamReader inputStreamReader1 = new InputStreamReader(
+				new FileInputStream("C:\\Users\\Admin\\Desktop\\Java評量_第6題cars.csv"));) {
+			try (BufferedReader bwBufferedReader = new BufferedReader(inputStreamReader1)) {
 				String line = null;
 				bwBufferedReader.readLine(); // 讀取第一行 是否為標題
 
@@ -47,10 +45,8 @@ public class Carlist2 {
 
 					groupBycarList.add(newCar);
 				}
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				throw e;
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

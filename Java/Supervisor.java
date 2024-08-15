@@ -5,6 +5,7 @@ public class Supervisor extends Employee {
 	private int payment;
 
 	public int getPayment() {
+		payment = getSalary();
 		return payment;
 	}
 
@@ -20,6 +21,6 @@ public class Supervisor extends Employee {
 	@Override
 	public void printInfo() {
 		super.printInfo();
-		System.out.println("總計:" + payment);
+		System.out.println("總計:" + getPayment());
 	}
 }

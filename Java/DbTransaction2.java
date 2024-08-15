@@ -176,6 +176,7 @@ public class DbTransaction2 {
 				// 紀錄查詢資料結果
 				ResultSet rs = pstmt.executeQuery();
 
+				// 結果為true有回傳值
 				if (rs.next()) {
 					System.out.println("查詢結果： 製造商：" + rs.getString("MANUFACTURER") + "，類型：" + rs.getString("TYPE")
 							+ "，售價：" + rs.getBigDecimal("PRICE") + "，底價：" + rs.getBigDecimal("MIN_PRICE"));
@@ -194,7 +195,6 @@ public class DbTransaction2 {
 			conn.setAutoCommit(false);
 
 			PreparedStatement pstmt = conn.prepareStatement(UPDATE_CARS_SQL);
-			pstmt.setString(1, "MANUFACTURER");
 
 			pstmt.setString(3, carData.get("MANUFACTURER"));
 			pstmt.setString(4, carData.get("TYPE"));

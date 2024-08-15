@@ -19,18 +19,19 @@ public class Sales extends Employee {
 	}
 
 	public int getPayment() {
+		payment = Math.round(getSalary() + bonus);
 		return payment;
 	}
 
 	public void setPayment(int payment) {
-		this.payment = getSalary() + bonus;
+		this.payment = payment;
 	};
 
 	@Override
 	public void printInfo() {
 		super.printInfo();
 		System.out.println("業績獎金:" + Math.round(bonus));
-		System.out.println("總計:" + Math.round(getSalary() + bonus));
+		System.out.println("總計:" + getPayment());
 	}
 
 }

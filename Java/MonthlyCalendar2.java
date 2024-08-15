@@ -11,12 +11,12 @@ public class MonthlyCalendar2 {
 
 		System.out.print("輸入介於1-12之間的整數:");
 		int month = VaildIntInput(scanner);
+		scanner.close();
 
 		if (month < 1 || month > 12) {
 			System.out.println("無效的月份。請輸入1到12之間的數字");
+			System.exit(0);
 		}
-
-		scanner.close();
 
 		LocalDate date = LocalDate.now().withMonth(month).withDayOfMonth(1);
 
