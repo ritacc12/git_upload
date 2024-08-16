@@ -5,7 +5,6 @@ public class Supervisor extends Employee {
 	private int payment;
 
 	public int getPayment() {
-		payment = getSalary();
 		return payment;
 	}
 

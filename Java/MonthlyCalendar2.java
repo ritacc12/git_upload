@@ -15,7 +15,7 @@ public class MonthlyCalendar2 {
 
 		if (month < 1 || month > 12) {
 			System.out.println("無效的月份。請輸入1到12之間的數字");
-			System.exit(0);
+			System.exit(0); // 也可以改為return 結束方法執行
 		}
 
 		LocalDate date = LocalDate.now().withMonth(month).withDayOfMonth(1);

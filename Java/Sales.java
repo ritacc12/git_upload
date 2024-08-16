@@ -7,7 +7,8 @@ public class Sales extends Employee {
 
 	public Sales(String name, String department, int salary, int performance) {
 		super(name, department, salary);
-		bonus = (int) (performance * 0.05);
+		this.bonus = (int) (performance * 0.05); // this.bonus會從getBonus取得bonus的值，並在主類別重新設置bonus與payment的關係
+		this.payment = salary + this.bonus; // this.payment會從getPayment取得payment的值，並在主類別重新設置payment與salary&bonus的關係
 	}
 
 	public int getBonus() {
@@ -19,7 +20,6 @@ public class Sales extends Employee {
 	}
 
 	public int getPayment() {
-		payment = Math.round(getSalary() + bonus);
 		return payment;
 	}
 
@@ -30,7 +30,7 @@ public class Sales extends Employee {
 	@Override
 	public void printInfo() {
 		super.printInfo();
-		System.out.println("業績獎金:" + Math.round(bonus));
+		System.out.println("業績獎金:" + bonus);
 		System.out.println("總計:" + getPayment());
 	}
 

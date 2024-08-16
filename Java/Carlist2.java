@@ -27,26 +27,24 @@ public class Carlist2 {
 		List<Map<String, String>> groupBycarList = new ArrayList<>();
 
 		try (InputStreamReader inputStreamReader1 = new InputStreamReader(
-				new FileInputStream("C:\\Users\\Admin\\Desktop\\Java評量_第6題cars.csv"));) {
-			try (BufferedReader bwBufferedReader = new BufferedReader(inputStreamReader1)) {
-				String line = null;
-				bwBufferedReader.readLine(); // 讀取第一行 是否為標題
+				new FileInputStream("C:\\Users\\Admin\\Desktop\\Java評量_第6題cars.csv"));
+				BufferedReader bwBufferedReader = new BufferedReader(inputStreamReader1);) {
 
-				// 會從第二行開始讀數
-				while ((line = bwBufferedReader.readLine()) != null) {
+			String line = null;
+			bwBufferedReader.readLine(); // 讀取第一行 是否為標題
 
-					String item[] = line.split(",");
+			// 會從第二行開始讀數
+			while ((line = bwBufferedReader.readLine()) != null) {
 
-					Map<String, String> newCar = new HashMap<>();
-					newCar.put("Manufacturer", item[0].trim());
-					newCar.put("Type", item[1].trim());
-					newCar.put("minPrice", item[2].trim());
-					newCar.put("price", item[3].trim());
+				String item[] = line.split(",");
 
-					groupBycarList.add(newCar);
-				}
-			} catch (Exception e) {
-				throw e;
+				Map<String, String> newCar = new HashMap<>();
+				newCar.put("Manufacturer", item[0].trim());
+				newCar.put("Type", item[1].trim());
+				newCar.put("minPrice", item[2].trim());
+				newCar.put("price", item[3].trim());
+
+				groupBycarList.add(newCar);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
