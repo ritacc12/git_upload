@@ -7,8 +7,10 @@ public class Sales extends Employee {
 
 	public Sales(String name, String department, int salary, int performance) {
 		super(name, department, salary);
-		this.bonus = (int) (performance * 0.05); // this.bonus會從getBonus取得bonus的值，並在主類別重新設置bonus與payment的關係
-		this.payment = salary + this.bonus; // this.payment會從getPayment取得payment的值，並在主類別重新設置payment與salary&bonus的關係
+		// 在建構的時候可以直接取得bonus set完成的資料
+		this.bonus = (int) (performance * 0.05); 
+		// 把salary + this.bonus的值設定給this.payment，建構子拿到這個值直接給個個class的成員變數 (若後續有人使用getPpayment()方法就可以直接取得payment變數的值)
+		this.payment = salary + this.bonus; 
 	}
 
 	public int getBonus() {
