@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HashMap</title>
+    <script type="text/javascript" src="HashMap.js"></script>
+    <script>
+
+
+        window.onload = function () {
+
+            const createElement = function (newKey, newValue) {
+                const opt = document.createElement('p');
+                opt.innerHTML = '\n' + 'KEY' + newKey + ':' + newValue + '\n';
+                return opt;
+            };
+
+            const map = new HashMap();
+
+
+            const element = document.getElementById('putBtn');
+            element.addEventListener("click", addFunction);
+            function addFunction() {
+                const key = document.getElementById('keyForm').value;
+                const value = document.getElementById('value').value;
+                const result = document.getElementById('resultBlock');
+
+                if (!key) {
+                    alert('please input key');
+                    return;
+                } else if (map.contains(key)) {
+                    alert('please input another key');
+                    return;
+                }
+                map.put(key, value);
+                result.appendChild(createElement(key, value));
+            }
+
+            document.getElementById('clearBtn').onclick = function () {
+                map.clear();
+                document.getElementById('keyForm').value = '';
+                document.getElementById('value').value = '';
+
+                const elements = document.querySelectorAll("#resultBlock p");
+                elements.forEach(function (element) {
+                    element.remove();
+                });
+            }
+        }
+
+    </script>
+</head>
+<style>
+    #form {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    input {
+        margin-left: 10px;
+    }
+
+    #btnGroup {
+        padding: 20px 10px 20px 10px;
+        border-top: 1px solid silver;
+        border-bottom: 1px solid silver;
+    }
+
+    button {
+        margin-left: 10px;
+    }
+
+    #resultBlock {
+        padding-top: 10px;
+    }
+</style>
+
+<body>
+    <div id='form'>
+        <table>
+            <tr>
+                <td>KEY</td>
+                <td><input type="text" id='keyForm' name='key'></td>
+            </tr>
+            <tr>
+                <td>VALUE</td>
+                <td><input type="text" id='value' name='value'></td>
+            </tr>
+        </table>
+
+    </div>
+    <div id="btnGroup">
+        <button type="submit" id='putBtn'>PUT</button>
+        <button id='clearBtn'>CLEAR</button>
+    </div>
+    <div id="resultBlock">
+        <span id="result">[RESULT]</span>
+    </div>
+</body>
+
+</html>
