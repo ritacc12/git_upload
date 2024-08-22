@@ -32,14 +32,16 @@
                 let radio = newRow.insertCell(0);
                 radio.innerHTML = '<input type="radio">';
                 radio.setAttribute('id', result.rows.length - 1);
+                
                 let radiobtn = document.getElementById('result').rows[result.rows.length - 1].cells[0].childNodes;
                 radiobtn[0].setAttribute('name', 'data');
+                radiobtn[0].setAttribute('id', result.rows.length - 1);
 
+                
                 radio.onclick = function () {
-                    //const radio = this.radio;
                     let result = document.getElementById('result');
                     radioID = document.getElementById('result').rows[result.rows.length - 1].cells[0].id;
-                    alert("Do something radio button was checked");
+                    // alert("Do something radio button was checked");
 
                     document.getElementById('manufacturer').value = result.rows[radioID].cells[2].textContent;
                     document.getElementById('category').value = result.rows[radioID].cells[3].textContent;
@@ -78,6 +80,12 @@
 
             document.getElementById('clear').onclick = function () {
                 let result = document.getElementById('result');
+
+                document.getElementById('manufacturer').value = '';
+                document.getElementById('category').value = '';
+                document.getElementById('minPrice').value = '';
+                document.getElementById('price').value = '';
+
                 while (result.rows.length > 1) {
                     result.deleteRow(1);
                 }
@@ -95,16 +103,17 @@
                 let price = document.getElementById('price').value;
 
                 if (selectedRadio) {
-                    let row = document.querySelector(`#result tr[name="data-${result.rows.length - 1}"]`); //選取被選定的tr
+
+                    let index = selectedRadio.id;
+                    let row = document.querySelector(`#result tr[name="data-${index}"]`); //選取被選定的tr
 
                     if (!manuf || !category) {
-                    alert('製造商&類別請勿空白');
-                    return;
-                }
+                        alert('製造商&類別請勿空白');
+                        return;
+                    }
 
                     if (row.cells[2].textContent !== manuf) {
                         row.cells[2].textContent = manuf;
-                        console.log('false');
                     } else if (row.cells[3].textContent !== category) {
                         row.cells[3].textContent = category;
                     } else if (row.cells[4].textContent !== minPrice) {
@@ -137,7 +146,7 @@
         margin: 8px;
     }
 
-    input[type='radio']{
+    input[type='radio'] {
         text-align: center;
     }
 
@@ -184,15 +193,6 @@
             <td id="fPrice">售價</td>
             <td></td>
         </tr>
-        <!-- <tr id="content">
-             <td><input type="radio"></td> -->
-        <!-- <td>A</td>
-            <td>A</td>
-            <td>A</td>
-            <td>A</td>
-            <td>A</td> -->
-        <!-- <td><button>刪除</button></td> -->
-        <!--  </tr> -->
     </table>
 </body>
 
