@@ -33,20 +33,25 @@
                 radio.innerHTML = '<input type="radio">';
                 radio.setAttribute('id', result.rows.length - 1);
                 
-                let radiobtn = document.getElementById('result').rows[result.rows.length - 1].cells[0].childNodes;
-                radiobtn[0].setAttribute('name', 'data');
-                radiobtn[0].setAttribute('id', result.rows.length - 1);
+                let radiobtn = document.getElementById('result').rows[result.rows.length - 1].cells[0].childNodes[0];
+                radiobtn.setAttribute('name', 'data');
+                radiobtn.setAttribute('id', result.rows.length - 1);
 
                 
-                radio.onclick = function () {
+                radiobtn.onclick = function () {
                     let result = document.getElementById('result');
-                    radioID = document.getElementById('result').rows[result.rows.length - 1].cells[0].id;
-                    // alert("Do something radio button was checked");
+                    let selectedRadio = document.querySelector('#result input[type="radio"]:checked');
 
-                    document.getElementById('manufacturer').value = result.rows[radioID].cells[2].textContent;
-                    document.getElementById('category').value = result.rows[radioID].cells[3].textContent;
-                    document.getElementById('minPrice').value = result.rows[radioID].cells[4].textContent;
-                    document.getElementById('price').value = result.rows[radioID].cells[5].textContent;
+                    if (selectedRadio) {
+                       // radioID = document.getElementById('result').rows[result.rows.length - 1].cells[0].id;
+                       let index = selectedRadio.id;
+                       let row = document.querySelector(`#result tr[name="data-${index}"]`); //選取被選定的tr
+                        
+                        document.getElementById('manufacturer').value = result.rows[index].cells[2].textContent;
+                        document.getElementById('category').value = result.rows[index].cells[3].textContent;
+                        document.getElementById('minPrice').value = result.rows[index].cells[4].textContent;
+                        document.getElementById('price').value = result.rows[index].cells[5].textContent;
+                    }
                 }
 
                 //index
