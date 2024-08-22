@@ -14,13 +14,23 @@
             let radioID = '';
 
             function addFunction() {
-                let manuf = document.getElementById('manufacturer').value;
-                let category = document.getElementById('category').value;
-                let minPrice = document.getElementById('minPrice').value;
-                let price = document.getElementById('price').value;
+                let manuf = document.getElementById('manufacturer').value.trim();
+                let category = document.getElementById('category').value.trim();
+                let minPrice = Number(document.getElementById('minPrice').value);
+                let price = Number(document.getElementById('price').value);
 
                 if (!manuf || !category) {
                     alert('製造商&類別請勿空白');
+                    return;
+                }
+
+                if (minPrice instanceof String || price instanceof String || Number.isNaN(minPrice) || Number.isNaN(price)) {
+                    alert('請輸入數字');
+                    return;
+                }
+
+                if (minPrice >= price) {
+                    alert('售價需要高於底價');
                     return;
                 }
 
@@ -32,31 +42,32 @@
                 let radio = newRow.insertCell(0);
                 radio.innerHTML = '<input type="radio">';
                 radio.setAttribute('id', result.rows.length - 1);
-                
+
                 let radiobtn = document.getElementById('result').rows[result.rows.length - 1].cells[0].childNodes[0];
                 radiobtn.setAttribute('name', 'data');
                 radiobtn.setAttribute('id', result.rows.length - 1);
 
-                
+
                 radiobtn.onclick = function () {
                     let result = document.getElementById('result');
                     let selectedRadio = document.querySelector('#result input[type="radio"]:checked');
 
+
                     if (selectedRadio) {
-                       // radioID = document.getElementById('result').rows[result.rows.length - 1].cells[0].id;
-                       let index = selectedRadio.id;
-                       let row = document.querySelector(`#result tr[name="data-${index}"]`); //選取被選定的tr
-                        
-                        document.getElementById('manufacturer').value = result.rows[index].cells[2].textContent;
-                        document.getElementById('category').value = result.rows[index].cells[3].textContent;
-                        document.getElementById('minPrice').value = result.rows[index].cells[4].textContent;
-                        document.getElementById('price').value = result.rows[index].cells[5].textContent;
+                        let index = selectedRadio.id;
+                        let row = result.rows[index]; //選取被選定的tr
+
+                        document.getElementById('manufacturer').value = row.cells[2].textContent;
+                        document.getElementById('category').value = row.cells[3].textContent;
+                        document.getElementById('minPrice').value = row.cells[4].textContent;
+                        document.getElementById('price').value = row.cells[5].textContent;
                     }
                 }
 
                 //index
                 let index = newRow.insertCell(1);
                 index.textContent = result.rows.length - 1;
+                index.setAttribute('id', result.rows.length - 1);
 
                 //data
                 let dataValues = [manuf, category, minPrice, price];
@@ -69,9 +80,14 @@
                 //delete button
                 let deleteCell = newRow.insertCell(-1);
                 let deleteButton = document.createElement('button');
-                deleteButton.textContent = 'delete';
+                deleteButton.textContent = '刪除';
                 deleteButton.onclick = function () {
                     result.deleteRow(newRow.rowIndex);
+
+                    for (let i = 1; i < result.rows.length; i++) {
+                        let resetIndex = document.getElementById('result').rows[i].cells[1];
+                        resetIndex.textContent = i;
+                    }
                 };
                 deleteCell.appendChild(deleteButton);
 
@@ -94,6 +110,7 @@
                 while (result.rows.length > 1) {
                     result.deleteRow(1);
                 }
+
             }
 
 
@@ -117,17 +134,12 @@
                         return;
                     }
 
-                    if (row.cells[2].textContent !== manuf) {
-                        row.cells[2].textContent = manuf;
-                    } else if (row.cells[3].textContent !== category) {
-                        row.cells[3].textContent = category;
-                    } else if (row.cells[4].textContent !== minPrice) {
-                        row.cells[4].textContent = minPrice;
-                    } else if (row.cells[5].textContent !== price) {
-                        row.cells[5].textContent = price;
-                    } else {
-                        return;
-                    }
+                    row.cells[2].textContent = manuf;
+                    row.cells[3].textContent = category;
+                    row.cells[4].textContent = minPrice;
+                    row.cells[5].textContent = price;
+                } else {
+                    alert('請選擇要修改的行');
                 }
             }
 

@@ -13,7 +13,7 @@
 
             const createElement = function (newKey, newValue) {
                 const opt = document.createElement('p');
-                opt.innerHTML = '\n' + 'KEY' + newKey + ':' + newValue + '\n';
+                opt.innerHTML = `${newKey}` + ':' + `${newValue}` + '\n';
                 return opt;
             };
 
@@ -23,7 +23,7 @@
             const element = document.getElementById('putBtn');
             element.addEventListener("click", addFunction);
             function addFunction() {
-                const key = document.getElementById('keyForm').value;
+                const key = document.getElementById('keyForm').value.trim();
                 const value = document.getElementById('value').value;
                 const result = document.getElementById('resultBlock');
 
