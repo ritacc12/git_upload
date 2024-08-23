@@ -37,6 +37,7 @@
                 let result = document.getElementById('result');
                 let newRow = result.insertRow(-1); // 插入新的一行在最後
                 newRow.setAttribute('name', `data-${result.rows.length - 1}`);
+                newRow.setAttribute('id', result.rows.length - 1);
 
                 // radio button
                 let radio = newRow.insertCell(0);
@@ -52,7 +53,6 @@
                     let result = document.getElementById('result');
                     let selectedRadio = document.querySelector('#result input[type="radio"]:checked');
 
-
                     if (selectedRadio) {
                         let index = selectedRadio.id;
                         let row = result.rows[index]; //選取被選定的tr
@@ -62,7 +62,11 @@
                         document.getElementById('minPrice').value = row.cells[4].textContent;
                         document.getElementById('price').value = row.cells[5].textContent;
                     }
+
                 }
+
+
+
 
                 //index
                 let index = newRow.insertCell(1);
@@ -83,10 +87,13 @@
                 deleteButton.textContent = '刪除';
                 deleteButton.onclick = function () {
                     result.deleteRow(newRow.rowIndex);
-
                     for (let i = 1; i < result.rows.length; i++) {
-                        let resetIndex = document.getElementById('result').rows[i].cells[1];
-                        resetIndex.textContent = i;
+                        let resetIndex = document.getElementById('result');
+                        let resetRadioID = document.getElementById('result');
+                        let trNewrow = document.getElementById('result');
+                        resetIndex.rows[i].cells[1].textContent = i;
+                        resetRadioID.rows[i].cells[0].childNodes[0].id = i;
+                        trNewrow.rows[i].id = i;
                     }
                 };
                 deleteCell.appendChild(deleteButton);
@@ -95,7 +102,6 @@
                 document.getElementById('category').value = '';
                 document.getElementById('minPrice').value = '';
                 document.getElementById('price').value = '';
-
 
             }
 
@@ -125,9 +131,8 @@
                 let price = document.getElementById('price').value;
 
                 if (selectedRadio) {
-
                     let index = selectedRadio.id;
-                    let row = document.querySelector(`#result tr[name="data-${index}"]`); //選取被選定的tr
+                    let row = document.getElementById('result').rows[index]; //選取被選定的tr
 
                     if (!manuf || !category) {
                         alert('製造商&類別請勿空白');
@@ -138,6 +143,7 @@
                     row.cells[3].textContent = category;
                     row.cells[4].textContent = minPrice;
                     row.cells[5].textContent = price;
+
                 } else {
                     alert('請選擇要修改的行');
                 }

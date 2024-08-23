@@ -10,15 +10,6 @@ var HashMap = function () {
     },
     contains: function (key) {
       return key in obj ;
-
-      /* 原先的方式
-       for (let k in obj) {
-         if (k === key) {
-           return true;
-         }
-       }
-     return false;*/
-
     },
     get: function (k) {
       return obj[k];

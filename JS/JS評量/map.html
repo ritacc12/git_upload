@@ -13,7 +13,7 @@
 
             const createElement = function (newKey, newValue) {
                 const opt = document.createElement('p');
-                opt.innerHTML = `${newKey}` + ':' + `${newValue}` + '\n';
+                opt.innerHTML = `${newKey}:${newValue}\n`;
                 return opt;
             };
 
@@ -31,6 +31,7 @@
                     alert('please input key');
                     return;
                 } else if (map.contains(key)) {
+                    console.log(key in map);
                     alert('please input another key');
                     return;
                 }
