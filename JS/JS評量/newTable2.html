@@ -29,8 +29,13 @@
                     return;
                 }
 
-                if (minPrice >= price) {
+                if (minPrice > price) {
                     alert('售價需要高於底價');
+                    return;
+                }
+
+                if (minPrice < 0 || price < 0) {
+                    alert('售價&底價不得為負數');
                     return;
                 }
 
@@ -138,6 +143,22 @@
                         alert('製造商&類別請勿空白');
                         return;
                     }
+
+                    if (minPrice instanceof String || price instanceof String || Number.isNaN(minPrice) || Number.isNaN(price)) {
+                        alert('請輸入數字');
+                        return;
+                    }
+
+                    if (minPrice > price) {
+                        alert('售價需要高於底價');
+                        return;
+                    }
+
+                    if (minPrice < 0 || price < 0) {
+                        alert('售價&底價不得為負數');
+                        return;
+                    }
+
 
                     row.cells[2].textContent = manuf;
                     row.cells[3].textContent = category;
